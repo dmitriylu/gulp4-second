@@ -27,7 +27,7 @@ gulp.task('styles', () => {
         .pipe(concat('style.css'))
         .pipe(browserSync.stream())
         .pipe(autoprefixer({
-            overrideBrowserslist: ['last 2 versions'],
+            overrideBrowserslist: ['last 5 versions'],
             cascade: false
         }))
         .pipe(cleanCSS({
@@ -49,9 +49,10 @@ gulp.task('styles', () => {
 //         'node_modules/slick-carousel/slick/slick.css',
 //     ])
 //         .pipe(concat('_libs.scss'))
-//         .pipe(gulp.dest('./src/scss'))
+//         .pipe(gulp.dest('./src/scss/other-scss'))
 //         .pipe(browserSync.stream());
 // });
+
 // Таск на скрипты JS
 gulp.task('scripts', () => {
     // шаблон для поиска js
@@ -92,15 +93,15 @@ gulp.task('del', () => {
     return del(['build/*'])
 });
 gulp.task('img-compress', () => {
-    return gulp.src('./src/img/**')
+    return gulp.src('./src/images/**')
         .pipe(imagemin({
             progressive: true
         }))
-        .pipe(gulp.dest('./build/img/'))
+        .pipe(gulp.dest('./build/images/'))
 });
 
 gulp.task('svg', () => {
-    return gulp.src('./src/img/svg/*.svg')
+    return gulp.src('./src/images/svg/*.svg')
         .pipe(svgmin({
             js2svg: {
                 pretty: true
@@ -124,7 +125,7 @@ gulp.task('svg', () => {
                 }
             }
         }))
-        .pipe(gulp.dest('./build/img/svg/'))
+        .pipe(gulp.dest('./build/images/svg/'))
 });
 
 gulp.task('fonts', () => {
@@ -140,7 +141,7 @@ gulp.task('watch', () => {
         }
     });
     gulp.watch('./src/img/**', gulp.series('img-compress'))
-    gulp.watch('./src/img/svg/**/*.svg', gulp.series('svg'))
+    gulp.watch('./src/images/svg/**/*.svg', gulp.series('svg'))
     gulp.watch('./src/fonts/**', gulp.series('fonts'))
     gulp.watch('./src/scss/**/*.scss', gulp.series('styles'))
     gulp.watch('./src/scss/**/*.sass', gulp.series('styles'))
